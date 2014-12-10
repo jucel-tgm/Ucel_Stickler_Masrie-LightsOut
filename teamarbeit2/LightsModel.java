@@ -44,8 +44,15 @@ public class LightsModel {
 		int feldNr;
 		for (int i = 0; i < anzahl; i++) {
 			feldNr = (int) (Math.random() * 25 + 1);
-			field[feldNr] = false;
+			field[feldNr] = true;
 		}
 	}
 
+	public void onClick(int position){
+		field[position] = true;
+		field[position+1] = !field[position+1];
+		field[position-1] = !field[position-1];
+		field[position+5] = !field[position+5];
+		field[position-5] = !field[position-5];
+	}
 }
