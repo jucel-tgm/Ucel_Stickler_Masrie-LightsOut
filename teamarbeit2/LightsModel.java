@@ -28,11 +28,24 @@ import javax.swing.JOptionPane;
  * 
  */
 public class LightsModel {
+	private boolean field[];
 
 	/**
 	 * Standardkonstruktor
 	 */
 	public LightsModel() {
-		
+		field = new boolean[25];
+		for (int i = 0; i < field.length; i++)
+			field[i] = false;
 	}
+
+	public void randomStart() {
+		int anzahl = (int) (Math.random() * 5 + 1);
+		int feldNr;
+		for (int i = 0; i < anzahl; i++) {
+			feldNr = (int) (Math.random() * 25 + 1);
+			field[feldNr] = false;
+		}
+	}
+
 }
