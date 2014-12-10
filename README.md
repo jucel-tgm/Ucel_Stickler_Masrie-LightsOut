@@ -11,3 +11,6 @@ Die Teammitglieder sind: Stickler, Masrie und Ucel
 Stickler: GUI
 Masrie: Controller
 Ucel: Model
+
+
+Das Grundlage des Protokolls wird von Ucel erstellt und von den anderen Mitgliedern ergänzt
