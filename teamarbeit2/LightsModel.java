@@ -1,4 +1,4 @@
-package ucel;
+package teamarbeit2;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +32,7 @@ public class LightsModel {
 	/**
 	 * Standardkonstruktor
 	 */
-	public LottoModel() {
+	public LightsModel() {
 		
 	}
 }
