@@ -37,6 +37,8 @@ public class Controller implements ActionListener {
 		this.lm = new LightsModel();
 		this.lp = new LightsPanel(this);
 		this.lf = new LightsFrame(lp, "Lights Out");
+		lm.randomStart();
+		lf.repaint();
 	}
 
 	/*
@@ -47,7 +49,19 @@ public class Controller implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		Object o = e.getSource();
+		int i = 0;
+		for (; i < lp.getButtons().length; ++i) {
+			if (lp.getButtons()[i] == o)
+				break;
+		}
+		lm.onClick(i);
+		for (int x = 0; x < lm.getField().length; x++) {
+			if (lm.getField()[x])
+				lp.getButtons()[x].setBackground(Color.WHITE);
+			else
+				lp.getButtons()[x].setBackground(Color.BLACK);
+		}
 	}
 
 	public static void main(String[] args) {
