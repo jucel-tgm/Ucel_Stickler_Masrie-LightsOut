@@ -48,11 +48,46 @@ public class LightsModel {
 		}
 	}
 
-	public void onClick(int position){
-		field[position] = true;
-		field[position+1] = !field[position+1];
-		field[position-1] = !field[position-1];
-		field[position+5] = !field[position+5];
-		field[position-5] = !field[position-5];
+	public void onClick(int position) throws IllegalArgumentException {
+		/*
+		 * if (position - 1 < 0 || position > field.length - 1 || position >=
+		 * 5|| position >= 21) { throw new IllegalArgumentException(); }
+		 */
+		for (int i = 0; i < field.length; i += 5) {
+			if (position == i){
+				// KANNST DU NICHT NACH LINKS
+				field[position + 1] = !field[position + 1];
+			}
+		}
+		for (int i = 5; i < field.length; i += 5)
+			if (position == i)
+				field[position - 1] = !field[position - 1];
+
+		if (position < 5)
+			field[position + 5] = !field[position + 5];
+
+		if (position > 19)
+			field[position - 5] = !field[position - 5];
+		field[position] = !field[position];
+		/*
+		 * field[position + 1] = !field[position + 1]; field[position - 1] =
+		 * !field[position - 1]; field[position + 5] = !field[position + 5];
+		 * field[position - 5] = !field[position - 5];
+		 */
+	}
+
+	/**
+	 * @return the field
+	 */
+	public boolean[] getField() {
+		return field;
+	}
+
+	/**
+	 * @param field
+	 *            the field to set
+	 */
+	public void setField(boolean[] field) {
+		this.field = field;
 	}
 }
