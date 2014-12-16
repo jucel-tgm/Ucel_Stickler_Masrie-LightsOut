@@ -1,4 +1,4 @@
-package ucel;
+package teamarbeit2;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -28,11 +28,94 @@ import javax.swing.JOptionPane;
  * 
  */
 public class LightsModel {
+	private boolean field[];
+	private int size;
 
 	/**
 	 * Standardkonstruktor
 	 */
-	public LottoModel() {
-		
+	public LightsModel(int size) {
+		this.size = size;
+		field = new boolean[size];
+		for (int i = 0; i < field.length; i++)
+			field[i] = true;
+	}
+
+	public void randomStart() {
+		int anzahl = (int) (Math.random() * 5 + 1);
+		int feldNr;
+		int max = (int) (Math.random()*size+1);
+		for (int i = 0; i < max; i++) {
+			feldNr = (int) (Math.random() * max + 1);
+			try {
+				field[feldNr] = false;
+			} catch (ArrayIndexOutOfBoundsException e1) {
+				System.err.println("TEST");
+			}
+		}
+	}
+
+	public boolean win() {
+		for (boolean val : field) {
+			if (val)
+				return false;
+		}
+
+		return true;
+	}
+
+	public void onClick(int position) throws IllegalArgumentException {
+		int tmp = (int) Math.sqrt(size);
+		try {
+			field[position - 1] = !field[position - 1];
+		} catch (ArrayIndexOutOfBoundsException a1) {
+
+		}
+		try {
+			field[position + 1] = !field[position + 1];
+		} catch (ArrayIndexOutOfBoundsException a2) {
+
+		}
+		try {
+			field[position - tmp] = !field[position - tmp];
+		} catch (ArrayIndexOutOfBoundsException a3) {
+
+		}
+		try {
+			field[position + tmp] = !field[position + tmp];
+		} catch (ArrayIndexOutOfBoundsException a4) {
+
+		}
+		field[position] = !field[position];
+	}
+
+	/**
+	 * @return the field
+	 */
+	public boolean[] getField() {
+		return field;
+	}
+
+	/**
+	 * @param field
+	 *            the field to set
+	 */
+	public void setField(boolean[] field) {
+		this.field = field;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size
+	 *            the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
