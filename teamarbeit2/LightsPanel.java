@@ -19,20 +19,23 @@ public class LightsPanel extends JPanel{
 	/**
 	 * 
 	 */
-	public LightsPanel(Controller lc) {
-		this.setLayout(new GridLayout(5,5));
+	public LightsPanel(Controller lc, int fieldSize) {
+		this.setLayout(new GridLayout(fieldSize+1,fieldSize,4,4));
 		this.lc = lc;
-		buttons = new JButton[25];
+		buttons = new JButton[fieldSize*fieldSize];
 		restart = new JButton("Neustart");
 		
 		for(int i = 0; i<buttons.length;i++){
-			
 				buttons[i] = new JButton();
-				this.add(buttons[i]);
 				buttons[i].addActionListener(lc);
+				buttons[i].setBackground(Color.GREEN);
+				buttons[i].setOpaque(true);
+				this.add(buttons[i]);
 			}
-		}
-		
+		restart = new JButton("Restart");
+		restart.addActionListener(lc);
+		this.add(restart);
+	}
 	
 	/**
 	 * @return the lc
