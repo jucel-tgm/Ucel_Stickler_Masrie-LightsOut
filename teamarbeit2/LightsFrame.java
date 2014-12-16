@@ -24,6 +24,5 @@ public class LightsFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		// Mache den Frame sichtbar!
 		this.setVisible(true);
-
 	}
 }
