@@ -29,51 +29,64 @@ import javax.swing.JOptionPane;
  */
 public class LightsModel {
 	private boolean field[];
+	private int size;
 
 	/**
 	 * Standardkonstruktor
 	 */
-	public LightsModel() {
-		field = new boolean[25];
+	public LightsModel(int size) {
+		this.size = size;
+		field = new boolean[size];
 		for (int i = 0; i < field.length; i++)
-			field[i] = false;
+			field[i] = true;
 	}
 
 	public void randomStart() {
 		int anzahl = (int) (Math.random() * 5 + 1);
 		int feldNr;
-		for (int i = 0; i < anzahl; i++) {
-			feldNr = (int) (Math.random() * 25 + 1);
-			field[feldNr] = true;
+		int max = (int) (Math.random()*size+1);
+		for (int i = 0; i < max; i++) {
+			feldNr = (int) (Math.random() * max + 1);
+			try {
+				field[feldNr] = false;
+			} catch (ArrayIndexOutOfBoundsException e1) {
+				System.err.println("TEST");
+			}
 		}
 	}
 
-	public void onClick(int position) throws IllegalArgumentException {
-		/*
-		 * if (position - 1 < 0 || position > field.length - 1 || position >=
-		 * 5|| position >= 21) { throw new IllegalArgumentException(); }
-		 */
-		for (int i = 0; i < field.length; i += 5) {
-			if (position == i){
-				// KANNST DU NICHT NACH LINKS
-				field[position + 1] = !field[position + 1];
-			}
+	public boolean win() {
+		for (boolean val : field) {
+			if (val)
+				return false;
 		}
-		for (int i = 5; i < field.length; i += 5)
-			if (position == i)
-				field[position - 1] = !field[position - 1];
 
-		if (position < 5)
-			field[position + 5] = !field[position + 5];
+		return true;
+	}
 
-		if (position > 19)
-			field[position - 5] = !field[position - 5];
+	public void onClick(int position) throws IllegalArgumentException {
+		int tmp = (int) Math.sqrt(size);
+		try {
+			field[position - 1] = !field[position - 1];
+		} catch (ArrayIndexOutOfBoundsException a1) {
+
+		}
+		try {
+			field[position + 1] = !field[position + 1];
+		} catch (ArrayIndexOutOfBoundsException a2) {
+
+		}
+		try {
+			field[position - tmp] = !field[position - tmp];
+		} catch (ArrayIndexOutOfBoundsException a3) {
+
+		}
+		try {
+			field[position + tmp] = !field[position + tmp];
+		} catch (ArrayIndexOutOfBoundsException a4) {
+
+		}
 		field[position] = !field[position];
-		/*
-		 * field[position + 1] = !field[position + 1]; field[position - 1] =
-		 * !field[position - 1]; field[position + 5] = !field[position + 5];
-		 * field[position - 5] = !field[position - 5];
-		 */
 	}
 
 	/**
@@ -89,5 +102,20 @@ public class LightsModel {
 	 */
 	public void setField(boolean[] field) {
 		this.field = field;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size
+	 *            the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
