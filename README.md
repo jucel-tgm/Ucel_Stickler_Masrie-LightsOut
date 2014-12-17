@@ -13,4 +13,4 @@ Masrie: Controller
 Ucel: Model
 
 
-Das Grundlage des Protokolls wird von Ucel erstellt und von den anderen Mitgliedern ergänzt
+Das Protokoll wird von Masrie erstellt und von den anderen Mitgliedern ergänzt
