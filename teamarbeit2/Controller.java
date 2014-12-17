@@ -20,8 +20,8 @@ import javax.swing.event.ChangeListener;
  * Controller Klasse mit dem Listener, wo auf die Button-Klicks richtig reagiert
  * wird
  * 
- * @author Johannes Ucel
- * @version 10.10.2014
+ * @author Oliver Masrie
+ * @version 17.12.2014
  * 
  */
 public class Controller implements ActionListener {
@@ -54,7 +54,13 @@ public class Controller implements ActionListener {
 		Object o = e.getSource();
 		if (e.getActionCommand().equals("Restart")) {
 			lm.randomStart();
+			lp.setMoveCounter(0);
+			lp.getMoves().setText("Moves: " + lp.getMoveCounter());
+			color();
 		} else {
+			lp.setMoveCounter(lp.getMoveCounter() + 1);
+			System.err.println(lp.getMoveCounter());
+			lp.getMoves().setText("Moves: " + lp.getMoveCounter());
 			int i = 0;
 			for (; i < lp.getButtons().length; ++i) {
 				if (lp.getButtons()[i] == o)
@@ -67,8 +73,13 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Gewonnen",
 						"Gut Gemacht :)", JOptionPane.INFORMATION_MESSAGE);
 		}
+
+		lp.repaint();
 	}
 
+	/**
+	 * Methode um die Farbe der Buttons zu setzen
+	 */
 	public void color() {
 		for (int x = 0; x < lm.getField().length; x++) {
 			System.out.println("COUNTER:" + x);
@@ -79,6 +90,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Main - Methode zum Starten
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new Controller();
 	}
